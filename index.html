@@ -1,1 +1,441 @@
-<h1> demo test </h1>
+<!DOCTYPE hvtml>
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+<title>ZSEVC</title>
+<style>
+    /* 设置表格容器的样式，使其水平居中 */
+    .table-container {
+      display: flex; /* 使用 flexbox 布局 */
+      justify-content: center; /* 水平居中 */
+      align-items: center; /* 垂直居中 */
+      width: 100vw; /* 占满整个视口的宽度 */
+      overflow-x: hidden; /* 避免水平滚动条 */
+    }
+
+    table {
+      border-collapse: collapse; /* 合并表格的边框 */
+      width: auto; /* 表格宽度为自动 */
+      margin: 0; /* 移除表格的默认边距 */
+    }
+
+    td, th {
+      border: 1px solid black; /* 添加边框 */
+      padding: 10px; /* 添加内边距 */
+    }
+</style>
+<meta name="generator" content="Jekyll v3.9.0">
+<meta property="og:title" content="TODO: title">
+<meta property="og:locale" content="en_US">
+
+
+<meta name="twitter:card" content="summary">
+<!-- End Jekyll SEO tag -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="theme-color" content="#157878">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body data-new-gr-c-s-check-loaded="14.1001.0" data-gr-ext-installed="">
+    <section class="page-header">
+      
+    </section>
+
+<section class="main-content">
+    <h1 id=""><center>Zero-Shot Speaker-Adaptive Emotional Voice Conversion with Duration Modeling</center></h1>
+    <center> Shiyan Wang<sup>1,2</sup>, Tianhua Qi<sup>1,2</sup>, Cheng Lu<sup>1,2</sup>, Yuan Zong<sup>1,2</sup>, Wenming Zheng<sup>1,2*</sup></center>
+    <center> <sup>1</sup> Key Laboratory of Child Development and Learning Science (Southeast University), Ministry of Education, Nanjing 210096, China</center>
+    <center> <sup>2</sup> School of Biological Science and Medical Engineering, Southeast University, China</center>
+
+
+<h2 id="abstract">1. Abstract</h2>
+<p> 
+    The objective of Emotion Voice Conversion (EVC) is to modify the emotional tone of speech while maintaining the speaker's identity and the integrity of the content. However, current EVC models exhibit limited generalisation capabilities, and the collection of large emotional datasets is a time-consuming and costly process. To address this issue, we propose a Zero-Shot Emotion Voice Conversion (ZSEVC) model based on self-supervised learning. The model in question is capable of predicting the duration of discrete units and adjusting the speech rhythm in accordance with the prevailing emotional state. The incorporation of a hierarchical emotion fusion module facilitates the integration of emotional features into content features, thereby enhancing pronunciation. Furthermore, a residual speaker-emotion fusion module has been designed to facilitate the adaptation of speaker characteristics in emotional expression. The results of the experiments demonstrate that ZSEVC is more effective than existing EVC methods in terms of both naturalness and diversity of emotional expression. Furthermore, it is capable of achieving high levels of performance in zero-shot scenarios involving the generation of emotional speech for unseen emotions and speakers.
+ </p>
+	<center><img src='assets/fig/model.png' width=1200px></center>
+<br><br>
+
+<h2>2. Experimental Results</h2>
+
+<h3>2.1 Seen Emotion Class and Speakers</h3>
+
+<table class="table-container">
+  <tbody>
+    <tr>
+	<td style="text-align: center; width: 100px;" rowspan=1><strong>Source<strong></td>
+        <td style="text-align: center; width: 100px;" rowspan=1><strong>Reference<strong></td>
+        <td style="text-align: center; width: 100px;" rowspan=1><strong>ZEST<strong></td>
+        <td style="text-align: center; width: 100px;" rowspan=1><strong>Textless-EVC<strong></td>
+        <td style="text-align: center; width: 100px;" rowspan=1><strong>ZSEVC(Proposed)<strong></td>
+        <td style="text-align: center; width: 100px;" rowspan=1><strong>Target<strong></td>
+        <td style="text-align: center; width: 100px;" rowspan=1><strong>Text<strong></td>
+    </tr>
+		
+    <tr>
+	    <th colspan=8 style="font-size:80%" centering><h8>Neutral-to-Angry</th>
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0011_000023.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0011_000373.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0011_0000230011_000373.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/angry/9741__0011_000023.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0011_0000230011_000373.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0011_000373.wav"></audio></td>
+    	<td style="width: 350px;">I thought you meant how old are you?</td>
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0011_000033.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0013_000383.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0011_0000330013_000383.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/angry/13842__0011_000033.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0011_0000330013_000383.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0011_000383.wav"></audio></td>
+    	<td style="width: 350px;">This used to be Jerry's occupation.</td>
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0014_000032.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0014_000371.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0014_0000320014_000371.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/angry/21913__0014_000032.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0014_0000320014_000371.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0014_000382.wav"></audio></td>
+    	<td style="width: 350px;">Who is been repeating all that hard stuff to you?</td>
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0015_000032.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0015_000382.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0015_0000320015_000382.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/angry/21992__0015_000032.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0015_0000320015_000382.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0015_000382.wav"></audio></td>
+    	<td style="width: 350px;">Who is been repeating all that hard stuff to you?</td>
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0018_000043.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0018_000397.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0018_0000430018_000397.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/angry/24223__0018_000043.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0018_0000430018_000397.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0017_000393.wav"></audio></td>
+    	<td style="width: 350px;">Story twenty nine a boy and a monkey.</td>
+
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0019_000023.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0012_000394.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0019_0000230012_000394.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/angry/9732__0019_000023.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0019_0000230012_000394.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0019_000373.wav"></audio></td>
+    	<td style="width: 350px;">I thought you meant how old are you?</td>
+        
+    </tr>
+    <tr>
+	    <th colspan=8 style="font-size:80%" centering><h8>Neutral-to-Happy</th>
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0013_000025.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0013_000729.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0013_0000250013_000729.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/happy/26383__0013_000025.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0013_0000250013_000729.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0013_000725.wav"></audio></td>
+    	<td style="width: 350px;">She is now choosing skirt to wear.</td>
+        
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0016_000035.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0019_000731.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0016_0000350019_000731.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/happy/28070__0016_000035.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0016_0000350019_000731.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0016_000735.wav"></audio></td>
+    	<td style="width: 350px;">The name really is the agedaged man.</td>
+        
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0016_000037.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0020_000737.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0016_0000370020_000737.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/happy/30376__0016_000037.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0016_0000370020_000737.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0016_000737.wav"></audio></td>
+    	<td style="width: 350px;">I think it'll encourage me.</td>
+        
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0017_000024.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0017_000724.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0017_0000240017_000724.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/happy/7803__0017_000024.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0017_0000240017_000724.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0017_000724.wav"></audio></td>
+    	<td style="width: 350px;">The football teams give a tea party.</td>
+        
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0017_000038.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0016_000736.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0017_0000380016_000736.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/happy/28800__0017_000038.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0017_0000380016_000736.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0017_000738.wav"></audio></td>
+    	<td style="width: 350px;">Hold up my chin, slow and solid.</td>
+        
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0014_000050.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0012_000750.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0014_0000500012_000750.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/happy/26610__0014_000050.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0014_0000500012_000750.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0014_000750.wav"></audio></td>
+    	<td style="width: 350px;">Rabbit gave dog a hurrying up sort of nudge.</td>
+        
+    </tr>
+    <tr>
+	    <th colspan=8 style="font-size:80%" centering><h8>Neutral-to-Sad</th>
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0012_000038.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0012_001088.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0012_0000380012_001088.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/sad/28861__0012_000038.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0012_0000380012_001088.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0012_001088.wav"></audio></td>
+    	<td style="width: 350px;">Hold up my chin, slow and solid.</td>
+        
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0013_000025.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0020_001086.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0013_0000250020_001086.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/sad/26381__0013_000025.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0013_0000250020_001086.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0013_001075.wav"></audio></td>
+    	<td style="width: 350px;">She is now choosing skirt to wear.</td>
+        
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0016_000035.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0016_001075.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0016_0000350016_001075.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/sad/28072__0016_000035.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0016_0000350016_001075.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0016_001085.wav"></audio></td>
+    	<td style="width: 350px;">The name really is the agedaged man.</td>
+        
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0017_000027.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0017_001077.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0017_0000270017_001077.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/sad/19302__0017_000027.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0017_0000270017_001077.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0017_001077.wav"></audio></td>
+    	<td style="width: 350px;">Monster made a deep bow.</td> 
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0017_000038.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0017_001091.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0017_0000380017_001091.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/sad/28809__0017_000038.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0017_0000380017_001091.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0017_001088.wav"></audio></td>
+    	<td style="width: 350px;">Hold up my chin, slow and solid.</td> 
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0020_000047.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0017_001072.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0020_0000470017_001072.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/sad/657__0020_000047.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0020_0000470017_001072.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0020_001097.wav"></audio></td>
+    	<td style="width: 350px;">please excuse me.</td> 
+    </tr>
+    <tr>
+	    <th colspan=8 style="font-size:80%" centering><h8>Neutral-to-Surprise</th>
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0011_000028.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0016_001428.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0011_0000280016_001428.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/surprise/27143__0011_000028.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0011_0000280016_001428.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0011_001428.wav"></audio></td>
+    	<td style="width: 350px;">She had said, so that one could keep up a conversation!</td> 
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0011_000048.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0011_001448.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0011_0000480011_001448.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/surprise/19146__0011_000048.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0011_0000480011_001448.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0011_001448.wav"></audio></td>
+    	<td style="width: 350px;">You are not a runaway,who are you?</td> 
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0015_000034.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0011_001446.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0015_0000340011_001446.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/surprise/890__0015_000034.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0015_0000340011_001446.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0015_001434.wav"></audio></td>
+    	<td style="width: 350px;">A divine wrath made her blue eyes awful.</td> 
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0018_000043.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0018_001442.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0018_0000430018_001442.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/surprise/24226__0018_000043.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0018_0000430018_001442.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0018_001443.wav"></audio></td>
+    	<td style="width: 350px;">Story twenty nine a boy and a monkey.</td> 
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0016_000035.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0018_001434.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0016_0000350018_001434.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/surprise/28074__0016_000035.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0016_0000350018_001434.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0016_001435.wav"></audio></td>
+    	<td style="width: 350px;">The name really is the agedaged man.</td> 
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0014_000032.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0012_001446.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0014_0000320012_001446.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets/audios/Textless-EVC/surprise/21911__0014_000032.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0014_0000320012_001446.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0014_001432.wav"></audio></td>
+    	<td style="width: 350px;">Who is been repeating all that hard stuff to you?</td> 
+    </tr>
+    
+
+
+    
+
+		
+    </tbody>
+</table>
+
+<h3>2.2 Zero-Shot Settings</h3>
+
+<h4>Unseen Target Emotion</h4>
+
+<table class="table-container">
+  <tbody>
+    <tr>
+	    <th colspan=8 centering><h8>Unseen Target Emotion</th>
+    </tr>
+    <tr>
+	    <td style="text-align: center; width: 100px;" rowspan=1><strong>Source<strong></td>
+        <td style="text-align: center; width: 100px;" rowspan=1><strong>Reference<strong></td>
+        <td style="text-align: center; width: 100px;" rowspan=1><strong>Reference Emotion<strong></td>
+        <td style="text-align: center; width: 100px;" rowspan=1><strong>ZEST<strong></td>
+        <td style="text-align: center; width: 100px;" rowspan=1><strong>ZSEVC<strong></td>
+	    <td style="text-align: center; width: 100px;" rowspan=1><strong>Text<strong></td>
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0011_000021.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ravdess\02_fear_01.wav"></audio></td>
+        <td style="text-align: center; width: 100px;" rowspan=1><strong>Fear<strong></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0011_00002102_fear_01.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0011_00002102_fear_01.wav"></audio></td>
+    	<td style="width: 350px;">As rich as Peter's son in law!</td> 
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0013_000025.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ravdess\01_fear_02.wav"></audio></td>
+        <td style="text-align: center; width: 100px;" rowspan=1><strong>Fear<strong></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0013_00002501_fear_02.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0013_00002501_fear_02.wav"></audio></td>
+    	<td style="width: 350px;">She is now choosing skirt to wear.</td> 
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0016_000035.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ravdess\02_fear_01.wav"></audio></td>
+        <td style="text-align: center; width: 100px;" rowspan=1><strong>Fear<strong></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0016_00003502_fear_01.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0016_00003502_fear_01.wav"></audio></td>
+    	<td style="width: 350px;">The name really is the agedaged man.</td> 
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0017_000038.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ravdess\12_disgust_02.wav"></audio></td>
+        <td style="text-align: center; width: 100px;" rowspan=1><strong>Disgust<strong></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0017_00003812_disgust_02.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0017_00003812_disgust_02.wav"></audio></td>
+    	<td style="width: 350px;">Hold up my chin, slow and solid.</td> 
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0016_000035.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ravdess\07_disgust_02.wav"></audio></td>
+        <td style="text-align: center; width: 100px;" rowspan=1><strong>Disgust<strong></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0016_00003507_disgust_02.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0016_00003507_disgust_02.wav"></audio></td>
+    	<td style="width: 350px;">The name really is the agedaged man.</td> 
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0012_000022.wav"></audio></td>       
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ravdess\01_disgust_01.wav"></audio></td>
+        <td style="text-align: center; width: 100px;" rowspan=1><strong>Disgust<strong></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\0012_00002201_disgust_01.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\0012_00002201_disgust_01.wav"></audio></td>
+    	<td style="width: 350px;">And what are doves. And what are doves.</td> 
+    </tr>
+    
+		
+    </tbody>
+</table>
+<h4> Unseen Source Speaker </h4>
+
+<table class="table-container">
+    <tbody>
+        <tr>
+            <th colspan=8 centering><h8>Unseen Source Speaker</th>
+        </tr>
+        <tr>
+            <td style="text-align: center; width: 100px;" rowspan=1><strong>Source<strong></td>
+            <td style="text-align: center; width: 100px;" rowspan=1><strong>Reference<strong></td>
+            <td style="text-align: center; width: 100px;" rowspan=1><strong>ZEST<strong></td>
+            <td style="text-align: center; width: 100px;" rowspan=1><strong>ZSEVC<strong></td>
+            <td style="text-align: center; width: 100px;" rowspan=1><strong>Text<strong></td>
+        </tr>
+        <tr>
+            <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\TIMIT\FALK0.wav"></audio></td>       
+            <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0012_000375.wav"></audio></td>
+            <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\FALK00012_000375.wav"></audio></td>
+            <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\FALK00012_000375.wav"></audio></td>
+            <td style="width: 350px;">Masquerade parties tax one's imagination.</td> 
+        </tr>
+        <tr>
+            <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\TIMIT\FALK0.wav"></audio></td>       
+            <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0017_001426.wav"></audio></td>
+            <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\FALK00017_001426.wav"></audio></td>
+            <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\FALK00017_001426.wav"></audio></td>
+            <td style="width: 350px;">Masquerade parties tax one's imagination.</td> 
+        </tr>
+        <tr>
+            <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\TIMIT\FLHD0.wav"></audio></td>       
+            <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0012_000375.wav"></audio></td>
+            <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\FLHD00012_000375.wav"></audio></td>
+            <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\FLHD00012_000375.wav"></audio></td>
+            <td style="width: 350px;">The todler found a clamshel near the camp site.</td> 
+        </tr>
+        <tr>
+            <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\TIMIT\FLKM0.wav"></audio></td>       
+            <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ESD_test\0020_001071.wav"></audio></td>
+            <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZEST\FLKM00020_001071.wav"></audio></td>
+            <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="assets\audios\ZSEVC\FLKM00020_001071.wav"></audio></td>
+            <td style="width: 350px;">His betrayal of an edgy head in the clouds artist is virtualy flawles.</td> 
+        </tr>
+    </tbody>
+</table>
+
+      <footer class="site-footer">
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com/">GitHub Pages</a>.</span>
+      </footer>
+    </section>
+
+</body></html>
